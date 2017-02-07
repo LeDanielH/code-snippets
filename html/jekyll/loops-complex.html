@@ -1,0 +1,23 @@
+<!-- LOOPS -->
+{% for cupcake in site.cupcakes reversed limit: 3 offset: 3 %}
+<div class="cupcake">
+	<div class="image">
+		<img
+			src="{{ cupcake.image_path }}"
+			alt="{{ cupcake.type }}"
+			style="-webkit-filter: {% cycle 'grayscale', 'sepia', 'invert' %}(100%)" />
+	</div>
+	<h2
+		{% if forloop.first or forloop.last %}
+			style="background: black; color: white;"
+		{% endif %}
+
+	    <!--or I could use this for the last three items, rindex = reversed index -->
+		{% if forloop.rindex <= 3 %}
+			style="background: black; color: white;"
+		{% endif %}
+		title="{{forloop.length}}"
+	>{{ forloop.index }}.{{ cupcake.type }}</h2> <!-- forloop.index will return nummber, forloop.index0 will start at 0 -->
+	<p>{{ cupcake.description }}</p>
+</div>
+{% endfor %}

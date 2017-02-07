@@ -1,0 +1,16 @@
+<!-- YAML SHOW ELEMENT IN PAGE  -->
+---
+show_footer: false
+---
+{% if page.show_footer %}
+	<footer>I am a footer</footer>
+{% endif %}
+
+
+<!-- LIQUID -->
+<h1>{{ page.heading | upcase | truncate: 8 }}</h1>
+{% if page.heading contains "cupcake" %}
+	<h1>I want cupcakes</h1>
+{% else %}
+	<h1>I don't want cupcakes</h1>
+{% endif %}

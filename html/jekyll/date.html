@@ -1,0 +1,26 @@
+<!-- DISPLAING DATE -->
+
+<p>{{ post.date | date: '%B %d, %Y' }}</p>
+
+---
+date: 2016-03-23T10:20:00Z
+---
+{{ page.date | date_to_long_string }}
+23 March 2016
+{{ page.date | date_to_string }}
+23 Mar 2016
+{{ page.date | date: "%m/%d/%Y" }}
+03/23/2016
+<!-- migth be useful for Javascript -->
+{{ page.date | date_to_xmlschema }}
+2016-03-23T23:20:00+13:00
+
+<!-- -rd -st -th -nd -->
+{% assign day = page.date | date: "%-d"  %}
+{% case day %}
+	{% when '1' or '21' or '31' %}{{ day }}st
+	{% when '2' or '22' %}{{ day }}nd
+	{% when '3' or '23' %}{{ day }}rd
+	{% else %}{{ day }}th
+{% endcase %}
+{{ page.date | date: "of %B, %Y" }}

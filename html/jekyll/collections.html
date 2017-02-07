@@ -1,0 +1,18 @@
+<!-- COLLECTIONS -->
+---
+type: Chocolate Banana
+rating: 1
+image_path: /images/cupcakes/chocolate_banana.jpg
+description: Our delicious chocolate and banana cupcake.
+---
+<div class="cupcakes">
+	{% for cupcake in site.cupcakes %}
+	{% if cupcake.type != "Lemon" and cupcake.rating < 3 %} <!-- will show everything but lemon -->
+	<div class="cupcake">
+		<div class="image"><img src="{{ cupcake.image_path }}" alt="{{ cupcake.type }}" /></div>
+		<h2>{{ cupcake.type }}</h2>
+		<p>{{ cupcake.description }}</p>
+	</div>
+	{% endif %}
+	{% endfor %}
+</div>

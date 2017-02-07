@@ -1,0 +1,30 @@
+<nav class="page__navigation sidebar">
+	{% for nav in site.data.navigation %}
+	{% if nav.submenu != null %}
+	<a class="menu-item" href="{{ nav.url }}">&nbsp;&nbsp;{{ nav.label }}&nbsp;&nbsp; <i class="ic-angle-right"></i></a>
+	<nav class="sub-menu">
+		<span class="menu-up"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></span>
+		{% for submenu in nav.submenu %}
+		{% if submenu.subsubmenu != null %}
+		<a class="submenu-item" href="{{ submenu.url }}">{{ submenu.label }}&nbsp;&nbsp; <i class="ic-angle-right"></i></a>
+		<nav class="subsub-menu">
+			<span class="menu-up"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></span>
+			{% for subsubmenu in submenu.subsubmenu %}
+			<a class="submenu-item" href="{{ site.baseurl }}{{ subsubmenu.url }}">{{ subsubmenu.label }}</a>
+			{% endfor %}
+		</nav>
+		{% else %}
+		{% if submenu.url contains 'http' %}
+		<a class="submenu-item" href="{{ submenu.url }}" target="_blank">{{ submenu.label }}&nbsp;&nbsp;</a>
+		{% else %}
+		<a class="submenu-item" href="{{ site.baseurl }}{{ submenu.url }}">{{ submenu.label }}&nbsp;&nbsp;</a>
+		{% endif %}
+		{% endif %}
+		{% endfor %}
+	</nav>
+	{% else %}
+	<a class="menu-item" href="{{ nav.url }}">&nbsp;&nbsp;{{ nav.label }}&nbsp;&nbsp;</a>
+	{% endif %}
+	{% endfor %}
+	<a class="nav-icon fa fa-bars" href="#"></a>
+</nav>

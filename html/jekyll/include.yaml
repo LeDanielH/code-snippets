@@ -1,0 +1,6 @@
+{% for speaker in site.data.speakers %}
+- speaker: {{speaker.speaker}}
+  twitter: {{speaker.twitter}}
+  country: {{speaker.country}}
+  talk: {{speaker.talk}}
+{% endfor %}

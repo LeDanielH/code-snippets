@@ -1,0 +1,4 @@
+var markers = {{ site.data.locations | jsonify }}
+
+<a href="http://twitter.com/{{ site.data.authors[post.author].twitter_handle }}"></a>
+<img src="{{ site.data.authors[post.author].image_path }}" alt="{{ site.data.authors[post.author].full_name }}" class="profile" />

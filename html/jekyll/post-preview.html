@@ -1,0 +1,20 @@
+---
+layout: page
+title: Blog Page
+excerpt_separator: <!-- excerpt -->
+published: false
+---
+<!-- published false temporarily remove page from jekyll indexing -->
+<ul>
+	{% for post in site.posts %}
+	<li><a href="{{ post.url }}">{{ post.title }}</a>
+		<!-- glimpse of what is inside -->
+		{{ post.excerpt }}
+	</li>
+	{% endfor %}
+</ul>
+
+How are chocolate cookies made?
+Well now you'll find out!
+<!-- excerpt -->
+The chocolate chip cookie was invented by Ruth Graves Wakefield.

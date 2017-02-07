@@ -1,0 +1,33 @@
+.element {
+    display: flex; // block level element
+    display: inline-flex; // inline-block level element
+    flex-direction: column-reverse; // flex-basis is height
+    flex-direction: row-reverse; // flex-basis is width
+    align-items: stretch; // all items will stretch
+    align-items: baseline;
+
+    flex: 1;
+    // same as
+    flex-grow: 1; // default
+    flex-shrink: 1; // default, means items can go below `flex-basis` if there is not enough space
+    flex-basis: 0;
+    /*
+    defaults to auto,
+    will overwrite the set `width`, will not exceed the `max-width` or go into the `min-width`
+    it is recommended to use `flex-basis` instead of `width` or `height` depending on the `flex-direction`
+    */
+
+    flex: 20px;
+    // same as
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 20px;
+
+    flex: 0 80px;
+    // same as
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 80px;
+
+    align-content: space-evenly; // used only with multiline content, e.g. when `flex-wrap: wrap`
+}

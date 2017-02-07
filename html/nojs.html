@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<!-- THIS IS WHERE I DEFINE 'no-js' CLASS -->
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>No JS</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- IF JAVASCRIPT WORKS, IT WILL CHANGE CLASS TO 'js' -->
+    <script>
+          nt.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+    <style>
+        html.no-js .nav {
+            /* no js css */
+        }
+
+        html.fonts-loaded {
+            /* show when fonts loaded */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav"></nav>
+</body>
+
+</html>

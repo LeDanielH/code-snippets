@@ -1,0 +1,14 @@
+<!-- JEKYLL SORTING IMAGES FOR GALLERY -->
+
+<!-- THIS IS EXAMPLE OF ONE OF THE COLLECTION FILES -->
+---
+image_path: /images/cakes/lemon-cake.jpg
+title: Lemon Cake
+weight: 1
+---
+{% assign sorted_photos = site.photo_gallery | sort: "weight" %}
+<ul class="photo-gallery">
+	{% for image in sorted_photos %}
+	<li><img src="{{ image.image_path }}" alt="{{ image.title}}"/></li>
+	{% endfor %}
+</ul>

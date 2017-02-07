@@ -1,0 +1,8 @@
+<!-- EXAMPLE CODE PAGES-->
+<div class="trigger">
+	{% for page in site.pages %}
+		{% if page.title %}
+		<a href="page-link"> {{ page.url | prepend: site.baseurl }}</a>
+		{% endif %}
+	{% endfor %}
+</div>

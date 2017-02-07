@@ -1,0 +1,69 @@
+<!-- LIQUID FILTERS -->
+{{ "cupcake" | prepend: "chocolate " }}
+chocolate cupcake
+
+{{ "lemon" | append: " cake" }}
+lemon cake
+
+{{ "i like cupcakes" | capitalize }}
+I like cupcakes
+
+{{ "BakeryStore" | downcase }}
+bakerystore
+
+{{ "apple pie" | upcase }}
+APPLE PIE
+
+{{ "muffin&cupcake?" | cgi_escape }}
+muffin%26cupcake%3F
+
+{{ "<h1>Banana Split</h1>" | escape }}
+<h1>Banana Split</h1>
+
+{{ "blueberry muffin.html" | slugify }}
+blueberry-muffin-html
+
+{{ "<h1>Greentea cheesecake</h1>" | strip_html }}
+Greentea cheesecake
+
+{{ "**Sour dough** bread" | markdownify }}
+Sour dough bread
+
+{{ "I really really like cupcakes" | remove_first: 'really' }}
+I really like cupcakes
+
+{{ "I really really like cupcakes" | remove: 'really' }}
+I like cupcakes
+
+{{ "I really really like cupcakes" | replace_first: "really", "truly" }}
+I truly really like cupcakes
+
+{{ "I really really like cupcakes" | replace: "really", "truly" }}
+I truly truly like cupcakes
+
+{{ "Carrot cake" | size }}
+11
+
+{{ "Peanut butter cheesecake" | number_of_words }}
+3
+
+{{ "Souffle" | slice: 0 }}
+S
+
+{{ "Souffle" | slice: 1 }}
+o
+
+{{ "Souffle" | slice: -2 }}
+l
+
+{{ "Souffle" | slice: 2,4 }}
+uffl
+
+{{ "apple,banana,carrot" | split:"," | jsonify }}
+["apple","banana","carrot"]
+
+{{ "The freshest bread in San Francisco" | truncate: 15 }}
+The freshest...
+
+{{ "Who ate all the cupcakes?" | truncatewords: 3 }}
+Who ate all...
