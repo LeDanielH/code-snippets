@@ -1,0 +1,702 @@
+@import "../base/my-variables";
+@import "../base/my-helpers";
+@import "../base/my-colors";
+
+/* btn placeholders */
+@each $name, $color in $project-colors {
+	%btn-#{$name} {
+		background-color: #{$color};
+		background: #{$color};
+		color: $cUKLight;
+		border: 1px solid #{$color};
+		&:hover, &:focus, &:active {
+			background-color: $cUKLight;
+			color: #{$color};
+			border: 1px solid #{$color};
+			.fa {
+				color: #{$color};
+			}
+			&:active {
+				&:hover {
+					background-color: $cUKLight;
+					color: #{$color};
+					border: 1px solid #{$color};
+					.fa {
+						color: #{$color};
+					}
+				}
+			}
+
+			&:focus {
+				&:hover {
+					background-color: $cUKLight;
+					color: #{$color};
+					border: 1px solid #{$color};
+					.fa {
+						color: #{$color};
+					}
+				}
+			}
+		}
+
+		.fa {
+			color: $cUKLight;
+		}
+
+		&[aria-expanded="true"] {
+			background-color: $cUKLight !important;
+			color: #{$color} !important;
+			border: 1px solid #{$color} !important;
+			.fa {
+				color: #{$color};
+			}
+		}
+
+		& ~ .dropdown-menu {
+			a, button.btn {
+				color: $cUKDark;
+				&:after {
+					display: none;
+				}
+			}
+
+			li {
+				a, button.btn {
+					background-color: transparent;
+				}
+				&:hover {
+					a, button.btn {
+						color: #{$color};
+						background-color: transparent;
+						&:after {
+							display: none;
+						}
+						i {
+							color: #{$color};
+						}
+					}
+				}
+			}
+		}
+
+		.well &, .form-footer &, .panel-footer & {
+			color: $cUKLight;
+			&:hover {
+				color: #{$color};
+			}
+		}
+	}
+}
+
+@each $name, $color in $project-colors {
+	%btn-#{$name}-inverted {
+		background-color: $cUKLight;
+		color: #{$color};
+		border: 1px solid #{$color};
+
+		.fa {
+			color: #{$color};
+		}
+
+		&:hover, &:focus, &:active {
+			background-color: #{$color};
+			color: $cUKLight;
+			border: 1px solid #{$color};
+
+			.fa {
+				color: $cUKLight;
+			}
+			&:active {
+				&:hover {
+					background-color: #{$color};
+					color: $cUKLight;
+					border: 1px solid #{$color};
+					.fa {
+						color: $cUKLight;
+					}
+				}
+			}
+
+			&:focus {
+				&:hover {
+					background-color: #{$color};
+					color: $cUKLight;
+					border: 1px solid #{$color};
+					.fa {
+						color: $cUKLight;
+					}
+				}
+			}
+		}
+		&[aria-expanded="true"] {
+			background-color: #{$color} !important;
+			color: $cUKLight !important;
+			border: 1px solid #{$color} !important;
+			.fa {
+				color: $cUKLight;
+			}
+		}
+		& ~ .dropdown-menu {
+			a, button.btn {
+				color: $cUKDark;
+				&:after {
+					display: none;
+				}
+			}
+
+			li {
+				&:hover {
+					a, button.btn{
+						color: #{$color};
+						background-color: transparent;
+						&:after {
+							display: none;
+						}
+						i {
+							color: #{$color};
+						}
+					}
+				}
+			}
+		}
+		.well &, .form-footer &, .panel-footer & {
+			color: $cUKLight;
+			&:hover {
+				color: #{$color};
+			}
+		}
+	}
+}
+
+%btn-disabled {
+	&.disabled, &[disabled] {
+		@extend %btn-grey-inverted;
+		user-select: none;
+		transform: none;
+		cursor: not-allowed;
+		color: $cBorder !important;
+	}
+}
+
+/* btn classes */
+@each $name, $color in $project-colors {
+	.btn-#{$name} {
+		@extend %btn-#{$name};
+		@extend %btn-disabled;
+	}
+}
+
+@each $name, $color in $project-colors {
+	.btn-#{$name}-inverted {
+		@extend %btn-#{$name}-inverted;
+		@extend %btn-disabled;
+	}
+}
+
+@each $name, $color in $project-colors-types {
+	.btn-#{$name} {
+		@extend %btn-#{$color};
+		@extend %btn-disabled;
+	}
+}
+
+@each $name, $color in $project-colors-types {
+	.btn-#{$name}-inverted {
+		@extend %btn-#{$color}-inverted;
+		@extend %btn-disabled;
+	}
+}
+
+%btn-info {
+	@extend %add__border;
+	color: $cUKDark;
+	background-color: $cUKLight;
+	.fa {
+		color: $cUKDark;
+	}
+	&:hover, &:focus, &:active {
+		color: $cUKPrimary;
+		border-color: $cUKPrimary;
+		background-color: $cUKLight;
+		.fa {
+			color: $cUKPrimary;
+		}
+	}
+	&:active {
+		&:hover {
+			color: $cUKPrimary;
+			border-color: $cUKPrimary;
+			background-color: $cUKLight;
+			.fa {
+				color: $cUKPrimary;
+			}
+		}
+	}
+
+	&:focus {
+		&:hover {
+			color: $cUKPrimary;
+			border-color: $cUKPrimary;
+			background-color: $cUKLight;
+			.fa {
+				color: $cUKPrimary;
+			}
+		}
+	}
+	&[aria-expanded="true"] {
+		color: $cUKPrimary !important;
+		border-color: $cUKPrimary !important;
+		background-color: $cUKLight !important;
+	}
+	& ~ .dropdown-menu {
+		a {
+			color: $cUKDark !important;
+			&:after {
+				display: none;
+			}
+		}
+
+		li {
+			a {
+				background-color: $cUKLight !important;
+			}
+			&:hover {
+				a {
+					color: $cUKPrimary !important;
+					border-color: $cUKPrimary;
+					background-color: $cUKLight !important;
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	@extend %btn-disabled;
+}
+
+%btn-info-inverted {
+	border: 1px solid $cUKPrimary;
+	color: $cUKPrimary;
+	background-color: $cUKLight;
+	.fa {
+		color: $cUKPrimary;
+	}
+	&:hover, &:focus, &:active {
+		color: $cUKDark;
+		border-color: $cBorder;
+		background-color: $cUKLight;
+		.fa {
+			color: $cUKDark;
+		}
+	}
+	&:active {
+		&:hover {
+			color: $cUKDark;
+			border-color: $cBorder;
+			background-color: $cUKLight;
+			.fa {
+				color: $cUKDark;
+			}
+		}
+	}
+
+	&:focus {
+		&:hover {
+			color: $cUKDark;
+			border-color: $cBorder;
+			background-color: $cUKLight;
+			.fa {
+				color: $cUKDark;
+			}
+		}
+	}
+	&[aria-expanded="true"] {
+		color: $cUKDark !important;
+		border-color: $cBorder !important;
+		background-color: $cUKLight !important;
+	}
+	& ~ .dropdown-menu {
+		a {
+			color: $cUKPrimary !important;
+			&:after {
+				display: none;
+			}
+		}
+
+		li {
+			a {
+				background-color: $cUKLight !important;
+			}
+			&:hover {
+				a {
+					color: $cUKDark !important;
+					border-color: $cBorder;
+					background-color: $cUKLight !important;
+					&:after {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	@extend %btn-disabled;
+}
+
+/*  buttons styles without color */
+%base-btn-style {
+	padding: 0 $base-spacing * 0.6 !important;
+	height: $h-btn;
+	line-height: $h-btn;
+	will-change: color, background-color, border-color;
+	@include will-change(color, background-color, border-color);
+	@extend %anim-base;
+	border-radius: 0 !important;
+	outline: 0 !important;
+	box-shadow: none !important;
+	display: inline-block;
+	cursor: pointer;
+	font-size: $fs-content;
+	white-space: nowrap;
+	&:hover, &:focus, &:active {
+		outline: 0 !important;
+	}
+	&:hover {
+		.fa-chevron-down {
+			animation-duration: 1s;
+			animation-name: slidingArrowDown;
+		}
+
+		.fa-chevron-up {
+			animation-duration: 1s;
+			animation-name: slidingArrowUp;
+		}
+		.fa-remove, .fa-clear, .fa-plus, .fa-delete, .fa-cancel, .fa-times {
+			&:before, &:after {
+				@extend %anim-btn-final;
+			}
+		}
+	}
+
+	&:active {
+		&:hover {
+			outline: 0 !important;
+		}
+	}
+
+	&:focus {
+		&:hover {
+			outline: 0 !important;
+		}
+	}
+
+	.fa, i, i.fa {
+		margin-right: $base-spacing/3;
+		position: relative;
+		&.fa-search {
+			font-size: $fs-content;
+		}
+		.filter-wrapper & {
+			@include margin(null 0 null null);
+		}
+	}
+
+	& ~ .dropdown-menu {
+		@extend %no-margin;
+		width: auto;
+		@extend %no-padding;
+		&-right {
+			@include position(absolute, null 0 null auto);
+		}
+		a, button.btn {
+			font-size: $fs-smaller;
+			@include padding($base-spacing/2 $base-spacing);
+			white-space: nowrap;
+			@include will-change(transform, color, background-color);
+			@extend %anim-base;
+		}
+		min-width: 100%;
+
+		li {
+			&:hover {
+				a, button.btn {
+					transform: translate3d($trLetters, 0, 0);
+				}
+			}
+			a.btn, button.btn {
+				border: none;
+				background-color: transparent;
+				&:hover, &:focus {
+					border: none;
+					background-color: transparent;
+				}
+				&.active {
+					&:hover, &:focus {
+						border: none;
+						background-color: transparent;
+					}
+				}
+			}
+			&.disabled {
+				opacity: 0.65;
+				cursor: not-allowed;
+				user-select: none;
+				@extend %anim-remove;
+				transform: none;
+				a, button {
+					cursor: not-allowed;
+					pointer-events: none;
+					user-select: none;
+					@extend %anim-remove;
+					transform: none;
+				}
+				&:hover {
+					a, button {
+						color: $cUKDark !important;
+					}
+				}
+			}
+		}
+	}
+	& + .btn.dropdown-toggle {
+		border-left: none;
+		&:hover, &:focus {
+			border-left: none;
+		}
+		&:active {
+			&:hover, &:focus {
+				border-left: none;
+			}
+		}
+		&[aria-expanded="true"] {
+			border-left: none !important;
+		}
+	}
+
+	.table-panel td & {
+		line-height: $h-smallest !important;
+		height: $h-smallest !important;
+		font-size: $fs-smaller;
+		@include margin($base-spacing * 0.25);
+	}
+
+	&.icon-only {
+		@extend %remove__padding;
+		text-align: center;
+		width: $h-btn;
+		font-weight: $fwB;
+		i, .fa {
+			@extend %remove__margin;
+		}
+	}
+
+	@media(max-width: $mqMobile) {
+		font-size: $fs-content;
+	}
+}
+
+.btn {
+	@extend %base-btn-style;
+	@extend %loading-button;
+	&-info {
+		@extend %btn-info;
+	}
+	&-info-inverted {
+		@extend %btn-info-inverted;
+	}
+	&#reload-resources {
+		@extend .btn-success;
+	}
+	&-disabled {
+		@extend %btn-grey-inverted;
+		pointer-events: none;
+	}
+	&.btn-grey {
+		line-height: 1;
+		height: $h-base * 0.5;
+		@include position(absolute, 50% ($base-spacing*0.5) null null);
+		margin-top: (-($h-base * 0.25));
+	}
+
+	&-default {
+
+		/* these are mostly table generated buttons that cannot be found in the project*/
+		&.buttons-colvis, &.buttons-reload {
+			@extend %btn-blue-inverted;
+			.form-footer & {
+				@extend %btn-blue;
+			}
+		}
+
+		&.buttons-insert, &.buttons-save {
+			@extend %btn-green-inverted;
+			.form-footer & {
+				@extend %btn-green;
+			}
+		}
+
+		&.buttons-cancel {
+			@extend %btn-orange-inverted;
+			.form-footer & {
+				@extend %btn-orange;
+			}
+		}
+
+		&.buttons-clear-filters {
+			.btn-group & {
+				@extend %btn-info;
+				opacity: 1;
+			}
+
+		}
+
+		&.buttons-excel, &.excel-export {
+			@extend %btn-green-inverted;
+			.form-footer & {
+				@extend %btn-green;
+			}
+		}
+	}
+
+	.fa-long-arrow-left, .fa-long-arrow-right {
+		transform: translate3d(0, 0, 0);
+	}
+
+	&:hover, &:focus, &:active {
+
+		.fa-long-arrow-left {
+			transform: translate3d(-$trLetters, 0, 0);
+		}
+
+		.fa-long-arrow-right {
+			transform: translate3d($trLetters, 0, 0);
+		}
+	}
+
+	&.hiding {
+		height: 0 !important;
+		line-height: 0 !important;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		border: none;
+	}
+}
+
+.filter-box-wrap button {
+	@extend %remove__padding;
+}
+
+.fa-cancel {
+	@extend .fa-remove;
+}
+
+
+
+.btn-group {
+	@extend %add__padding;
+	@extend %stretch;
+	background-color: $cUKLight;
+	&:before {
+		content: '';
+		display: block;
+		@extend %input-height;
+	}
+	&:empty {
+		@extend %no-padding;
+		display: none;
+	}
+
+	.btn {
+
+		&.buttons-insert, &.buttons-insert-submit, &.buttons-save, &.buttons-cancel {
+			margin-right: $base-spacing;
+		}
+
+		&.buttons-collection, &.buttons-clear-filters {
+			margin-left: $base-spacing;
+		}
+	}
+	@media (max-width: $screen-xs-max) {
+		@include padding(0 null);
+		.btn {
+			@include margin($base-spacing/2 0);
+		}
+	}
+}
+
+a {
+	&[data-confirm] {
+		&:focus {
+			outline: none !important;;
+			border: none !important;;
+			border-radius: 0 !important;
+		}
+	}
+}
+
+/* SPECIAL BULLSHIT PLUGIN OVERWRITES */
+
+.dataTables_wrapper .btn-group > .btn,
+.dataTables_wrapper .sweet-alert .btn-group > button,
+.sweet-alert .dataTables_wrapper .btn-group > button,
+table.dataTable .form-footer .btn, table.dataTable .form-footer .sweet-alert button,
+.sweet-alert table.dataTable .form-footer button,
+.btn, .sweet-alert button {
+	@extend %base-btn-style;
+}
+
+.sweet-alert button {
+	@extend %base-btn-style;
+	box-shadow: 0;
+}
+
+.sweet-alert button.cancel {
+	background-color: $cOrange !important;
+	color: $cUKLight !important;
+	border: 1px solid $cOrange !important;
+	&:hover, &:focus, &:active {
+		background-color: $cUKLight !important;
+		color: $cOrange !important;
+		border: 1px solid $cOrange !important;
+	}
+}
+
+table.dataTable .form-footer .btn, table.dataTable .form-footer .sweet-alert button, .sweet-alert table.dataTable .form-footer button {
+	@include margin(null $base-spacing/2);
+}
+
+table.dataTable .form-footer .btn, table.dataTable .form-footer .sweet-alert button, .sweet-alert table.dataTable .form-footer button {
+	@include padding($base-spacing/2 $base-spacing);
+}
+
+.sweet-alert .sa-confirm-button-container .confirm {
+	background-color: $cGreen !important;
+	color: $cUKLight !important;
+	border: 1px solid $cGreen !important;
+	&:hover, &:focus, &:active {
+		background-color: $cUKLight !important;
+		color: $cGreen !important;
+		border: 1px solid $cGreen !important;
+	}
+}
+
+.btn-grey {
+	border: none;
+	&:hover {
+		border: none;
+	}
+}
+
+td > button {
+	vertical-align: middle;
+	@extend %base-btn-style;
+	@extend .btn-default-inverted;
+	height: $h-base * 0.75;
+	line-height: $h-base * 0.75;
+	font-size: $fs-smaller;
+}
+
+.dt-buttons {
+	&:empty { display: none; }
+}

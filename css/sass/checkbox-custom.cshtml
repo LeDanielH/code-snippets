@@ -1,0 +1,9 @@
+﻿@using LinkSoft.Html
+@model bool
+<div class="checkbox">
+    <label for="@Html.IdFor(x => x)">
+        @Html.CheckBoxFor(x => x, Attr.New.Merge(Html.ViewData["Attributes"]).Class("form-control").List)
+        <span class="checkbox-label">@Html.DisplayNameFor(x => x)</span>
+        <span class="checkbox-custom"></span>
+    </label>
+</div>

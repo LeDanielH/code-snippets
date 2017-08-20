@@ -1,0 +1,182 @@
+/* BOOTSTRAP RESET */
+.breadcrumb > li + li:before {
+	content: '';
+}
+
+$bcLength: 10;
+
+/* MY STYLES */
+.breadcrumb {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	@extend %input-height;
+	@extend %no-padding;
+	box-sizing: content-box;
+	@extend %add__margin--bottom;
+
+	li {
+		background-color: $cUKLight;
+		@extend %add__border;
+		color: $cUKDark;
+		position: relative;
+		margin-right: $base-spacing;
+		font-size: $fs-content;
+		@include will-change(background-color, border, transform);
+		@extend %anim-base;
+		perspective: 100px;
+		a {
+			color: $cUKDark;
+			@extend %anim-color;
+			white-space: nowrap;
+			outline: 0;
+			-webkit-font-smoothing: antialiased;
+
+			i {
+				padding-right: $base-spacing/3;
+			}
+		}
+		&:after {
+			@include position(absolute, 0 0 0 null);
+			content: '';
+			display: block;
+			@include size(0);
+			border-top: $base-spacing - 1 solid transparent;
+			border-bottom: $base-spacing  - 1 solid transparent;
+			border-left: $base-spacing  - 1 solid $cUKLight;
+			transform: translate3d(97%, 0, 0);
+			@extend %anim-border;
+		}
+
+		&:before {
+			@include position(absolute, -1px 0 0 null);
+			content: '';
+			display: block;
+			@include size(0);
+			border-top: $base-spacing solid transparent;
+			border-bottom: $base-spacing solid transparent;
+			border-left: $base-spacing solid $cBorder;
+			transform: translate3d(100%, 0, 0);
+			@extend %anim-border;
+		}
+
+		&:hover {
+			color: $cUKPrimary;
+			border: 1px solid $cUKPrimary;
+
+			a {
+				color: $cUKPrimary;
+			}
+
+			&:before {
+				border-left: $base-spacing solid $cUKPrimary;
+			}
+		}
+
+		&.root {
+			border: 1px solid $cUKSecondary;
+			color: $cUKSecondary;
+
+			&:before {
+				border-left: $base-spacing solid $cUKSecondary;
+			}
+			a {
+				@include padding(null $base-spacing/2);
+				color: $cUKSecondary;
+				&:hover,&:focus {
+					color: $cUKSecondary;
+				}
+			}
+
+			&:hover {
+				background-color: $cUKSecondary;
+				a {
+					color: $cUKLight;
+				}
+				&:after {
+					border-left: $base-spacing - 1 solid $cUKSecondary;
+				}
+			}
+
+			&.active {
+				pointer-events: none;
+
+				color: $cUKLight;
+				border: 1px solid $cUKPrimary;
+				background-color: $cUKPrimary;
+				&:before {
+					border-left: $base-spacing solid $cUKPrimary;
+				}
+
+				&:after {
+					border-left: $base-spacing - 1 solid $cUKPrimary;
+				}
+				a {
+					color: $cUKLight;
+				}
+				@extend %no-padding;
+
+			}
+		}
+		&.active {
+			color: $cUKLight;
+			border: 1px solid $cUKPrimary;
+			background-color: $cUKPrimary;
+			&:before {
+				border-left: $base-spacing solid $cUKPrimary;
+			}
+
+			&:after {
+				border-left: $base-spacing - 1 solid $cUKPrimary;
+			}
+			@include padding(null $base-spacing/2 null $base-spacing*1.5);
+		}
+
+		&:not(:last-of-type) {
+			margin-left: - ($base-spacing * 1.13);
+			a {
+				@include padding(null $base-spacing/2 null $base-spacing*1.5);
+			}
+		}
+
+		&:not(.active) {
+			cursor: pointer;
+		}
+
+		span {
+			white-space: nowrap;
+		}
+	}
+	@media(max-width: $screen-sm-max) {
+		flex-direction: column-reverse;
+		height: auto;
+		direction: ltr;
+		background-color: transparent;
+
+		li {
+			transform: perspective(100px) translate3d(0, 0, 0) skewX(-20deg) rotate3d(1, 0, 0, -3deg);
+			-webkit-font-smoothing: antialiased;
+			margin-right: 0;
+
+			&:not(:last-of-type) {
+				@include margin(null 0);
+			}
+
+			&:before, &:after {
+				display: none;
+			}
+			margin-top: - $base-spacing/4;
+			@for $i from 0 through $bcLength {
+				&:nth-child(#{$i}) {
+					z-index: $bcLength - $i;
+				}
+			}
+			&:not(.active) {
+				&:hover {
+					transform: perspective(0px) translate3d( 0, - $base-spacing/6, 0) skewX(0deg) rotate3d(1, 0, 0, 0deg);
+				}
+			}
+		}
+
+	}
+}

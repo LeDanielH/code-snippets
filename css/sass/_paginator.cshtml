@@ -1,0 +1,182 @@
+﻿@model Kosmas.FullText.QueryResult
+@using Kosmas.FullText
+
+@* You may want to include
+<script type="text/javascript">
+$(function () {
+    $('#searchInput').val('@Html.Raw(Model.Items.Query.JavaScriptStringEncode())');
+});
+</script>
+to copy the query to the search box in the page header.*@
+@if (Model.Query.IsNotNullOrEmpty()) {
+    Html.FacebookTrack("Search", new { search_string = Model.Query });
+}
+
+@using (Html.BeginForm(MVC.FullText.Index(), FormMethod.Post, new { id = "frmFulltext" })) {
+    @Html.HiddenFor(m => m.Filters.ArticleTypeId)
+    @Html.HiddenFor(m => m.Filters.AuthorId)
+    @Html.HiddenFor(m => m.Filters.TranslatorId)
+    @Html.HiddenFor(m => m.Filters.CategoryId)
+    @Html.HiddenFor(m => m.Filters.CategoryIds)
+    @Html.HiddenFor(m => m.Filters.ArticleTypeIds)
+    @Html.HiddenFor(m => m.Filters.PublisherId)
+    @Html.HiddenFor(m => m.Filters.ShowWindowId)
+    @Html.HiddenFor(m => m.Filters.Availability)
+    @Html.HiddenFor(m => m.Filters.EBookFormatId)
+    @Html.HiddenFor(m => m.Filters.Title)
+    @Html.HiddenFor(m => m.Filters.Author)
+    @Html.HiddenFor(m => m.Filters.Translator)
+    @Html.HiddenFor(m => m.Filters.Illustrator)
+    @Html.HiddenFor(m => m.Filters.Publisher)
+    @Html.HiddenFor(m => m.Filters.ISBN_EAN)
+    @Html.HiddenFor(m => m.Filters.LanguageId)
+    @Html.HiddenFor(m => m.Filters.PriceRange)
+    @Html.HiddenFor(m => m.Filters.Defects)
+    @Html.HiddenFor(m => m.Filters.Display)
+    @Html.Hidden("Facets", (int)Model.Facets)
+    @Html.Hidden("Filters.Filtered", "True")
+    @Html.Hidden("fulltext_page", Model.Page + 1)
+    @Html.Hidden("fulltext_page_size", Model.PageSize)
+    @Html.Hidden("fulltext_sort_by", Model.SortBy)
+    @Html.Hidden("fulltext_query", Model.ExecutedQuery)
+    if (Model.Filters.CategoryId != 0) {
+        <input type="hidden" id="category_name" value="@Kosmas.Models.Category.NameForId(Math.Abs(Model.Filters.CategoryId)).EscapeForNiceUrl()"/>
+    }
+}
+@{ 
+    var simplifiedResults = false;// Model.Filters.IsAlmostEmpty() && Model.NumFound <= 6;
+    var showCategories = Model.Categories.Any() && Model.NumFound > 0 && !simplifiedResults;
+    var pagesCountForPaginator = (Model.NumFound -1 ) / Model.PageSize + 1;
+}
+
+<div class="section__container">
+    <div class="container">
+        <div class="row">
+            @if (showCategories) {
+                <aside class="col-md-3 cat-list__wrap" id="facet-category">
+                    @{Html.RenderPartial(MVC.FullText.Views._Categories);}
+                 </aside>
+            }
+                    <div class="search col-md-@(showCategories ? 9 : 12)">
+                        <div class="search-in">
+                            @if (Model.NumFound == 0 && !Model.Filters.Filtered) {
+                                <div class="obsah" id="fulltext_not_found">
+                                    <!-- obsah -->
+                                    <p>
+                                        Litujeme, na vámi zadaný dotaz
+                                        <b>@Model.ExecutedQuery</b>
+                                        jsme nenalezli žádné zboží.
+                                    </p>
+                                </div>
+                        <!-- obsah -->    } else {
+                                <div class="obsah" id="fulltext_results">
+                                    <!-- obsah -->
+                                    <div class="in">
+                                        <div class="search-pager">
+                                            <div class="search-pager-in">
+                                                @if (Model.SuggestedQuery != null) {
+                                                    <div class="search-pager-top" id="fulltext_suggested">
+                                                        <div class="search-pager-top-left float-left">
+                                                            <p>
+                                                                @if (Model.SuggestedQueryExecuted) {
+                                                                    <i>
+                                                                        Na Váš původní dotaz <strong>
+                                                                            @Model.Query
+                                                                        </strong> jsme nenašli žádné zboží, proto jsme jej pozměnili na
+                                                                        <strong>
+                                                                            @Model.SuggestedQuery
+                                                                        </strong>.
+                                                                    </i>
+} else {
+                                                                    <i>
+                                                                        Nemysleli jste náhodou <a href="javascript:Kosmas.Fulltext.ChangeQuery('@Model.SuggestedQuery.JavaScriptStringEncode()')">
+                                                                            @Model.SuggestedQuery
+                                                                        </a>? (@("|cz{0:N}|nula|{0} výsledky|{0} výsledků".FillIn(Model.SuggestedQueryNumFound)))
+                                                                    </i>}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+}
+
+                                                @if (simplifiedResults) {
+                                                    Model.Filters.Display = DisplayStyle.List;
+                                                } else {
+                                                    <div class="ft-filter">
+                                                        @Html.Partial(MVC.FullText.Views._FullTextFilter)
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <div id="fulltext_articles" class="grid-items">
+                                            @if (Model.Filters.Display == DisplayStyle.List) {
+                                                Html.RenderPartial(MVC.FullText.Views._ArticlesList, Model.ArticleData);
+                                            } else {
+                                                Html.RenderPartial(MVC.FullText.Views._Articles, Model.ArticleData);
+                                            }
+                                        </div>
+                                        @if (Model.NumPages > 1) {
+                                            <div class="clearfix"></div>
+                                            <div class="paginators space-b-40">
+                                                <div class="dummy"></div>
+                                                <div class="rel text-center" id="fulltext_readnext">
+                                                    <a class="btn btn--sm btn--arrow arrow-down" href="@Url.Action(MVC.FullText.Index(Model.ExecutedQuery, Model.Filters, Model.SortBy, Model.PageSize, Model.Page + 1))" onclick="Kosmas.Fulltext.AJAX_NextPage(); return false;">Načíst další</a>
+
+                                                </div>
+                                                <div class="paginator">
+                                                    <a class="paginator__arrow" data-direction="subtract" href="@Url.Action(MVC.FullText.Index(Model.ExecutedQuery, Model.Filters, Model.SortBy, Kosmas.Controllers.FullTextController.PAGE_SIZE, 1))" onclick="Kosmas.Fulltext.ChangePage(1); return false;"></a>
+                                                    <div class="paginator__numbers">
+                                                        @{
+                                                            var first = true;
+                                                            var paginatorMaxLength = 7;
+                                                        }
+
+                                                        @if (pagesCountForPaginator > paginatorMaxLength) {
+                                                            <a href="#" data-page="1" class="paginator__number active">1</a>
+                                                            for (int i = 0; i < pagesCountForPaginator; i++) {
+                                                                if (i > 0) { <a href="#" data-page="@(i + 1)" class="paginator__number">@(i + 1)</a> }
+                                                                if (i == 4) { break; }
+                                                            }
+                                                            <a href="#"  data-page="..." class="paginator__number dotted">...</a>
+                                                            <a href="#" data-page="@pagesCountForPaginator" class="paginator__number">@pagesCountForPaginator</a> 
+                                                         } else {
+                                                             for (int i = 0; i < pagesCountForPaginator; i++) {
+                                                                @* <a href="#" data-page="@(i + 1)" onclick="Kosmas.Fulltext.ChangePage(@(i + 1)); return false;" class="paginator__number @(first ? "active" : "")">@(i + 1)</a> *@
+                                                                <a href="#" data-page="@(i + 1)" class="paginator__number @(first ? "active" : "")">@(i + 1)</a> 
+                                                                first = false;
+                                                            } 
+                                                         }
+
+                                                    </div>
+                                                    <a class="paginator__arrow" data-direction="add" href="@Url.Action(MVC.FullText.Index(Model.ExecutedQuery, Model.Filters, Model.SortBy, Kosmas.Controllers.FullTextController.PAGE_SIZE, pagesCountForPaginator))" onclick="Kosmas.Fulltext.ChangePage(@pagesCountForPaginator); return false;"></a>
+                                                </div>
+                                            </div>
+                                                            }
+                                    </div>
+                                </div>
+                        <!-- obsah -->    }
+                        </div>
+                        <a class="cat__up-button" onclick="smoothScroll.animateScroll(document.querySelector( '#fulltext_results'), null, {offset: 100}); return false;" href="#">Nahoru</a>
+                    </div>
+</div>
+
+
+        @if (Model.Facets.HasFlag(FacetTypes.AlsoSeen)) {
+            var alsoSeenResult = ForRequest.GetDB().FetchAlsoSeen(15, null, Math.Abs(Model.Filters.CategoryId)).Select(res => new ThumbViewModel(res)).ToArray();
+            if (alsoSeenResult.Any()) {
+                <div class="space-t-30">
+                    <div class="section__books">
+                        <div class="section__title">Již jste viděli</div>
+                        <div class="books books--6">
+                            @{Html.RenderPartial(MVC.Shared.Views._Glider, new GliderViewModel() {
+                                    Thumbs = alsoSeenResult,
+                                    Id = "alsoSeenInCategory",
+                                });}
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

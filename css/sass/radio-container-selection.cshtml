@@ -1,0 +1,28 @@
+﻿
+<div class="radio-group-tabs">
+@for (int i = 0; i < Model.AvailableLocations.Count; i++)
+{
+<div class="form-group">
+    <div class="radiobox">
+        <label>
+            @{
+            object attributtes = null;
+            if (Model.LocationId == Model.AvailableLocations[i].Id)
+            {
+            attributtes = new {@checked = "checked"};
+            }
+            }
+            @Html.RadioButtonFor(x => x.LocationId, Model.AvailableLocations[i].Id, attributtes)
+            <span class="radiobox-label">
+                <span>
+                    <strong>@Model.AvailableLocations[i].Name</strong><br>
+                    @Model.AvailableLocations[i].Street<br>
+                    @Model.AvailableLocations[i].ZipCode @Model.AvailableLocations[i].CityPart
+                </span>
+            </span>
+            <span class="radiobox-custom"></span>
+        </label>
+    </div>
+</div>
+}
+            

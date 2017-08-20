@@ -1,0 +1,173 @@
+@arrowSize: 9px;
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: -5px;
+  & > * {
+    display: inline-block;
+  }
+}
+
+.paginators {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    // IE only styles
+    flex-wrap: wrap;
+  }
+  & > * {
+    flex-basis: 310px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // IE only styles
+      flex-basis: auto;
+      flex-shrink: 1;
+      flex-grow: 1;
+      min-width: 310px;
+    }
+  }
+  & > .rel {
+    flex-basis: 190px;
+    flex-shrink: 0;
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      // IE only styles
+      flex-basis: auto;
+      min-width: 190px;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+  }
+
+  .btn {
+    white-space: nowrap;
+  }
+
+  &.no-paginator {
+    justify-content: center;
+    .dummy {
+      display: none;
+    }
+  }
+}
+
+.paginator__arrow {
+  border-radius: @border-radius-small;
+  width: @arrowSize;
+  height: @arrowSize;
+  border-right: 2px solid @text-color;
+  border-bottom: 2px solid @text-color;
+  padding: @arrowSize/2;
+  background: none;
+  cursor: pointer;
+  transition: transform @transitionDuration/2 ease, border @transitionDuration/2 ease;
+  &:first-of-type {
+    transform: scale(1) rotate(135deg);
+    &:hover {
+      transform: scale(1.1) rotate(135deg);
+      border-right: 2px solid @red;
+      border-bottom: 2px solid @red;
+    }
+  }
+  &:last-of-type {
+    transform: scale(1) rotate(-45deg);
+    &:hover {
+      transform: scale(1.1) rotate(-45deg);
+      border-right: 2px solid @red;
+      border-bottom: 2px solid @red;
+    }
+  }
+}
+
+.dummy {
+  height: 1px;
+}
+
+.paginator__numbers {
+  padding: 0 10px;
+  display: flex;
+
+  div.paginator__arrow, div.paginator__number {
+    margin: 0 4px;
+    color: @text-color;
+    flex: 1 0 auto;
+    display: inline-block;
+    transition: all @transitionDuration/2 ease;
+    user-select: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    min-width: 20px;
+    text-align: center;
+
+    &.active {
+      color: @brand-primary;
+      background: none;
+      font-weight: bold;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &.displayed {
+      color: @brand-primary;
+      opacity: 0.9;
+      background: none;
+      font-weight: bold;
+    }
+
+    &.dotted {
+      text-decoration: none;
+      background: none;
+      cursor: default;
+      margin: 0;
+      pointer-events: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:not(.active), &:not(.dotted) {
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@media (max-width: @screen-md-max) {
+  .paginators {
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+
+    div:not(.paginator__arrow):empty {
+      display: none;
+    }
+
+    & > *, & > .rel {
+      flex-basis: auto;
+    }
+    & > .rel {
+      @media all {
+        // IE only styles
+        min-width: auto;
+      }
+    }
+  }
+
+  .paginator {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: @screen-md-max) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .paginators {
+    & > .rel, & > * {
+      min-width: auto;
+    }
+  }
+}

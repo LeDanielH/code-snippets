@@ -1,0 +1,47 @@
+.kf {
+	&__graph {
+		@include size(auto 120px);
+
+		&-border {
+			@include margin($spacing-text * 0.5);
+			border: 1px solid grey;
+		}
+
+		&-bar {
+			fill: cornflowerblue;
+			flex: 0 0 15px;
+			width: 15px;
+			text-align: center;
+			color: white;
+			@include padding($spacing-text * 0.5 null);
+			&:first-of-type {
+				@include margin(null null null $spacing-text);
+			}
+			&:last-of-type {
+				@include margin(null $spacing-text null null);
+			}
+		}
+	}
+	.tick {
+		line {
+			stroke: $c-graph-border;
+		}
+	}
+	.domain {
+		stroke: $c-graph-border;
+	}
+	g {
+		position: relative;
+	}
+	rect {
+		fill: $c-graph-bars;
+		& ~ text {
+			transform: translate(0, 20px);
+			text-anchor: middle;
+			stroke: #fffff;
+		}
+	}
+}
+.nvd3 .nv-axis.nv-y path.domain{
+	stroke-opacity: 0;
+}

@@ -1,0 +1,98 @@
+﻿.switch-wrapper {
+    label {
+        color: $cUKDark;
+        @extend %anim-color;
+        padding-left: 0;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    .switch-custom {
+        display: inline-block;
+        @include size(($h-base*0.7) ($h-base/2));
+        border: 1px solid $cUKPrimary;
+        position: relative;
+        @include will-change(border, transform);
+        @extend %anim-base;
+        margin: 0 $base-spacing/4;
+        &:after {
+            @include position(absolute, 2px 2px 2px 7px);
+            background-color: $cUKPrimary;
+            content: '';
+            display: block;
+            @include will-change(left, right, background-color);
+            @extend %anim-base;
+        }
+    }
+
+    .switch-yes { // label true
+        position: relative;
+        top: -2px;
+        display: inline-block;
+        color: $grey;
+        @extend %anim-color;
+        &:after {
+            @include position(absolute, null 0 0 0);
+            content: '';
+            background-color: $cGreen;
+            display: block;
+            width: 0%;
+            @extend %anim-width;
+            height: 1px;
+        }
+    }
+
+    .switch-no { // label false
+        position: relative;
+        top: -2px;
+        display: inline-block;
+        color: $cUKPrimary;
+        @extend %anim-color;
+        direction: ltr;
+        &:after {
+            @include position(absolute, null 0 0 0);
+            content: '';
+            background-color: $cUKPrimary;
+            display: block;
+            @extend %stretch;
+            @extend %anim-width;
+            height: 1px;
+            margin-left: 0;
+        }
+    }
+
+    .switch-yes, .switch-no {
+        line-height: normal;
+    }
+
+
+    input[type=checkbox] {
+
+        &:checked {
+            & ~ .switch-custom {
+                border-color: $cGreen;
+                &:after {
+                    @include position(absolute, 2px 7px 2px 2px);
+                    background-color: $cGreen;
+                }
+            }
+
+            & ~ .switch-yes {
+                color: $cGreen;
+                &:after {
+                    @extend %stretch;
+                }
+            }
+
+            & ~ .switch-no {
+                color: $grey;
+                &:after {
+                    width: 0%;
+                }
+            }
+
+        }
+    }
+}

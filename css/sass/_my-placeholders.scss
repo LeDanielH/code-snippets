@@ -1,0 +1,471 @@
+
+
+/*  BEM IS NOT WORKING WITH PLACEHOLDERS LIKE IT WORKS WITH CLASSES :( */
+@import "my-mixins";
+
+%underline {
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
+	line-height: normal;
+	&:after {
+		@include position(absolute, null 0 0 0);
+		content: '';
+		display: block;
+		width: 0%;
+		@extend %anim-width;
+		height: 1px;
+	}
+
+	&:hover {
+		text-decoration: none;
+		&:after {
+			width: 100%;
+		}
+	}
+}
+
+%pseudo {
+	position: absolute;
+	content: '';
+}
+
+%input-height {
+	line-height: $h-input;
+	height: $h-input;
+	font-size: $fs-content;
+}
+
+%table-height {
+	line-height: $h-table;
+	height: $h-table;
+	font-size: $fs-table;
+}
+
+%input-spacing {
+	@include padding(0 $base-spacing/2);
+}
+
+%read-only {
+	background-color: $cLightGreyTable !important;
+	border: 1px solid #ddd !important;
+	pointer-events: none !important;
+	@extend %anim-remove;
+	font-style: italic;
+
+	&:hover, &:focus {
+		background-color: $cLightGreyTable;
+		border: 1px solid #ddd;
+	}
+}
+
+$title-square-size: 7px;
+%heading-with-underline {
+	-webkit-padding-start: 2px;
+	-webkit-padding-end: 2px;
+	@include padding(0 0 ($base-spacing/3) $base-spacing);
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid $cUKPrimary;
+	border-left: none;
+	position: relative;
+	font-family: $ffUK;
+	font-weight: $fwL;
+	font-size: $fs-heading;
+	line-height: normal;
+	color: $cUKDark;
+	display: block;
+	width: 100%;
+	@include margin(0 0 $base-spacing 0);
+
+	i {
+		margin-right: $base-spacing/2;
+		color: $cUKPrimary;
+
+		&.fa-lg {
+			line-height: 0.4;
+		}
+	}
+	&:before {
+		@include position(absolute, $fs-title/2 null null 0);
+		content: '';
+		display: block;
+		@include size($title-square-size);
+		background-color: $cUKPrimary;
+	}
+
+	a & {
+		&:before {
+			@include size(0);
+			border-left: ($h-base * 0.17) solid transparent;
+			border-right: ($h-base * 0.17) solid transparent;
+			border-top: ($h-base * 0.3) solid $cUKPrimary;
+			background-color: transparent;
+			@extend %anim-transform;
+			transform: rotateX(180deg);
+		}
+	}
+	a.collapsed & {
+		&:before {
+			transform: rotateX(0deg);
+		}
+	}
+}
+
+%subheading-with-underline {
+	@extend %heading-with-underline;
+	margin-top: $base-spacing/2;
+	font-size: $fs-subtitle;
+	border-bottom: 1px solid $cUKSecondary;
+	&:before {
+		background-color: $cUKSecondary;
+		top: $fs-subtitle/4;
+	}
+}
+
+%loading-button {
+	.fa-spin {
+		display: none !important;
+		@include margin(0 ($base-spacing* 0.25));
+		line-height: $fs-content;
+	}
+	&.in-progress {
+		.fa-spin {
+			display: inline-flex !important;
+		}
+
+		.fa-download,.fa-check {
+			display: none;
+		}
+	}
+	.progress {
+		display: none;
+	}
+}
+
+%add__padding {
+	@include padding($base-spacing);
+	&.with-form-group {
+		@include padding($base-spacing $base-spacing ($base-spacing - $form-group-spacing) $base-spacing);
+	}
+}
+
+%pull-right {
+	text-align: right;
+	float: none !important;
+}
+
+%add__padding--top {
+	@include padding($base-spacing null null null);
+}
+%add__padding--bottom {
+	@include padding(null null $base-spacing null);
+	&.with-form-group {
+		@include padding(null null ($base-spacing - $form-group-spacing) null);
+	}
+}
+%add__padding--topbottom {
+	@include padding($base-spacing null);
+	&.with-form-group {
+		@include padding($base-spacing null ($base-spacing - $form-group-spacing) null);
+	}
+}
+%add__padding--sides {
+	@include padding(null $base-spacing);
+}
+
+// so you don't have to use ".remove__padding" classes below
+%add__padding-not--bottom {
+	@include padding($base-spacing $base-spacing 0 $base-spacing);
+}
+%add__padding-not--top {
+	@include padding(0 $base-spacing $base-spacing $base-spacing);
+	&.with-form-group {
+		@include padding(0 $base-spacing ($base-spacing - $form-group-spacing) $base-spacing);
+	}
+}
+%add__padding-not--topbottom {
+	@include padding(0 $base-spacing);
+}
+%add__padding-not--sides {
+	@include padding($base-spacing 0);
+	&.with-form-group {
+		@include padding($base-spacing 0 ($base-spacing - $form-group-spacing) 0);
+	}
+}
+
+
+%add__margin {
+	@include margin($base-spacing);
+}
+
+%add__margin--top {
+	@include margin($base-spacing null null null);
+}
+%add__margin--bottom {
+	@include margin(null null $base-spacing null);
+	&.with-form-group {
+		@include margin(null null ($base-spacing - $form-group-spacing) null);
+	}
+}
+%add__margin--topbottom {
+	@include margin($base-spacing null);
+	&.with-form-group {
+		@include margin($base-spacing null ($base-spacing - $form-group-spacing) null);
+	}
+}
+%add__margin--sides {
+	@include margin(null $base-spacing);
+}
+
+// so you don't have to use ".remove__margin" classes below
+%add__margin-not--bottom {
+	@include margin($base-spacing $base-spacing 0 $base-spacing);
+}
+%add__margin-not--top {
+	@include margin(0 $base-spacing $base-spacing $base-spacing);
+	&.with-form-group {
+		@include margin(0 $base-spacing ($base-spacing - $form-group-spacing) $base-spacing);
+	}
+}
+%add__margin-not--topbottom {
+	@include margin(0 $base-spacing);
+}
+%add__margin-not--sides {
+	@include margin($base-spacing 0);
+	&.with-form-group {
+		@include margin($base-spacing 0 ($base-spacing - $form-group-spacing) 0);
+	}
+}
+
+%remove__padding {
+	padding: 0 !important;
+}
+%remove__padding--top {
+	padding-top: 0!important;
+}
+%remove__padding--bottom {
+	padding-bottom: 0!important;
+}
+%remove__padding--topbottom {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+%remove__padding--sides {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+
+%remove__margin {
+	margin: 0 !important;
+}
+
+%remove__margin--top {
+	margin-top: 0!important;
+}
+%remove__margin--bottom {
+	margin-bottom: 0!important;
+}
+%remove__margin--topbottom {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+%remove__margin--sides {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+
+%add__border {
+	@include border-color($cBorder);
+	@include border-width(1px);
+	@include border-style(solid);
+}
+
+%add__border--top {
+	@include border-color($cBorder null null null);
+	@include border-width(1px null null null);
+	@include border-style(solid null null null);
+}
+%add__border--bottom {
+	@include border-color(null null $cBorder null);
+	@include border-width(null null 1px null);
+	@include border-style(null null solid null);
+}
+%add__border--topbottom {
+	@include border-color($cBorder null);
+	@include border-width(1px null);
+	@include border-style(solid null);
+}
+%add__border--sides {
+	@include border-color(null $cBorder);
+	@include border-width(null 1px);
+	@include border-style(null solid);
+}
+
+%add__border-not--bottom {
+	@include border-color($cBorder $cBorder null $cBorder);
+	@include border-width(1px 1px 0 1px);
+	@include border-style(solid solid null solid);
+}
+%add__border-not--top {
+	@include border-color(null $cBorder $cBorder $cBorder);
+	@include border-width(0 1px 1px 1px);
+	@include border-style(null solid solid solid);
+}
+%add__border-not--topbottom {
+	@include border-color(null $cBorder);
+	@include border-width(0 1px);
+	@include border-style(null solid);
+}
+%add__border-not--sides {
+	@include border-color($cBorder null);
+	@include border-width(1px 0px);
+	@include border-style(solid null);
+}
+
+%stretch {
+	width: 100%;
+}
+
+%stretch-half {
+	width: 50%;
+}
+
+%flex-start {
+	align-items: flex-start;
+}
+
+%flex-end {
+	align-items: flex-end;
+}
+
+%flex-start-self {
+	align-self: flex-start;
+}
+
+%spacer {
+	@include size(100% $h-base/2);
+}
+
+%dummy {
+	opacity: 0;
+}
+
+%center {
+	@include margin(null auto);
+}
+
+%justify-center {
+	display: flex;
+	justify-content: center;
+}
+
+%justify-center-all {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+%hide {
+	user-select: none;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	height: 0 !important;
+	line-height: 0 !important;
+	border: none;
+}
+
+%flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+%box-small {
+	max-width: 350px;
+}
+
+%sticky {
+	position: sticky;
+}
+
+%no-padding {
+	@include padding(0);
+}
+
+%no-margin {
+	@include margin(0);
+}
+
+%full-size {
+	@include size(100%);
+}
+
+%visuallyHidden {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	@include size(1px);
+	@include margin(-1px);
+	@extend %no-padding;
+	border: 0;
+}
+
+%centerAbsolutely {
+	@include position(absolute, 50% null null 50%);
+}
+
+%anim-base {
+	transition-duration: $transDur;
+	transition-timing-function: ease;
+}
+
+%anim-transform {
+	@extend %anim-base;
+	@include will-change(transform);
+}
+
+%anim-border {
+	@extend %anim-base;
+	@include will-change(border);
+}
+
+%anim-background {
+	@extend %anim-base;
+	@include will-change(background-color);
+}
+
+%anim-color {
+	@extend %anim-base;
+	@include will-change(color);
+}
+
+%anim-width {
+	@extend %anim-base;
+	@include will-change(width);
+}
+
+%anim-remove {
+	transition: none;
+}
+
+%anim-btn-initial {
+	@extend %anim-transform;
+	transform: rotate(-90deg) scale(0.8);
+}
+
+%anim-btn-final {
+	transform: rotate(0) scale(1);
+}
+
+/*
+.example-selector {
+	@extend %anim-base;
+	@include will-change(border, color, transform);
+	@extend %anim-border;
+}*/

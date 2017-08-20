@@ -1,0 +1,32 @@
+@mixin underline($underline-color) {
+	@extend %underline;
+	&:after {
+		background-color: $underline-color;
+	}
+}
+
+@mixin prepend-arrow($color, $size) {
+	@include margin(null null null $base-spacing);
+	position: relative;
+	&:before {
+		content: '';
+		@include position(absolute, 50% null null (-$base-spacing));
+		margin-top: -$size;
+		display: block;
+		border-top: $size solid transparent;
+		border-bottom: $size solid transparent;
+		border-left: $size solid $color;
+		@extend %anim-transform;
+	}
+
+	&:hover {
+		&:before {
+			@include transform(translate3d($trLetters, 0, 0));
+		}
+	}
+}
+
+@mixin will-change($animProperties...) {
+	will-change: #{$animProperties};
+	transition-property: #{$animProperties};
+}

@@ -1,0 +1,217 @@
+.add {
+	&__padding {
+		@extend %add__padding;
+
+		&--top {
+			@extend %add__padding--top;
+		}
+		&--bottom {
+			@extend %add__padding--bottom;
+		}
+		&--topbottom {
+			@extend %add__padding--topbottom;
+		}
+		&--sides {
+			@extend %add__padding--sides;
+		}
+
+		// so you don't have to use ".remove__padding" classes below
+		&-not {
+			&--bottom {
+				@extend %add__padding-not--bottom;
+			}
+			&--top {
+				@extend %add__padding-not--top;
+			}
+			&--topbottom {
+				@extend %add__padding-not--topbottom;
+			}
+			&--sides {
+				@extend %add__padding-not--sides;
+			}
+		}
+	}
+
+	&__margin {
+		@extend %add__margin;
+
+		&--top {
+			@extend %add__margin--top;
+		}
+		&--bottom {
+			@extend %add__margin--bottom;
+		}
+		&--topbottom {
+			@extend %add__margin--topbottom;
+		}
+		&--sides {
+			@extend %add__margin--sides;
+		}
+
+		// so you don't have to use ".remove__margin" classes below
+		&-not {
+			&--bottom {
+				@extend %add__margin-not--bottom;
+			}
+			&--top {
+				@extend %add__margin-not--top;
+			}
+			&--topbottom {
+				@extend %add__margin-not--topbottom;
+			}
+			&--sides {
+				@extend %add__margin-not--sides;
+			}
+		}
+	}
+}
+
+.remove {
+	&__padding {
+		@extend %remove__padding;
+
+		&--top {
+			@extend %remove__padding--top;
+		}
+		&--bottom {
+			@extend %remove__padding--bottom;
+		}
+		&--topbottom {
+			@extend %remove__padding--topbottom;
+		}
+		&--sides {
+			@extend %remove__padding--sides;
+		}
+	}
+
+	&__margin {
+		@extend %remove__margin;
+
+		&--top {
+			@extend %remove__margin--top;
+		}
+		&--bottom {
+			@extend %remove__margin--bottom;
+		}
+		&--topbottom {
+			@extend %remove__margin--topbottom;
+		}
+		&--sides {
+			@extend %remove__margin--sides;
+		}
+	}
+}
+
+.add {
+	&__border {
+		@extend %add__border;
+
+		&--top {
+			@extend %add__border--top;
+		}
+		&--bottom {
+			@extend %add__border--bottom;
+		}
+		&--topbottom {
+			@extend %add__border--topbottom;
+		}
+		&--sides {
+			@extend %add__border--sides;
+		}
+
+		&-not {
+			&--bottom {
+				@extend %add__border-not--bottom;
+			}
+			&--top {
+				@extend %add__border-not--top;
+			}
+			&--topbottom {
+				@extend %add__border-not--topbottom;
+			}
+			&--sides {
+				@extend %add__border-not--sides;
+			}
+		}
+	}
+}
+
+.stretch {
+	@extend %stretch;
+}
+
+.stretch-half {
+	@extend %stretch-half;
+}
+
+.flex-start {
+	@extend %flex-start;
+}
+
+.spacer {
+	@extend %spacer;
+}
+
+.dummy {
+	@extend %dummy;
+}
+
+.center {
+	@extend %center;
+}
+
+.justify-center {
+	@extend %justify-center;
+}
+
+.hide {
+	@extend %hide;
+}
+
+.flex-center {
+	@extend %flex-center;
+}
+
+.flex-start-self {
+	@extend %flex-start-self;
+}
+
+.flex-end {
+	@extend %flex-end;
+}
+
+.box-small {
+	@extend %box-small;
+}
+
+.sticky {
+	@extend %sticky;
+}
+
+.visuallyHidden {
+	@extend %visuallyHidden;
+}
+
+.pull-right {
+	@extend %pull-right;
+}
+
+.order-first {
+	order: 0;
+}
+
+.order-last {
+	order: 100;
+}
+%bg-light {
+	background-color: $cUKLight;
+}
+
+%bg-transparent {
+	background-color: transparent;
+
+	/* FIREFOX ONLY */
+	@supports (-moz-appearance:none) and (display:contents) {
+		@extend %bg-light;
+	}
+}

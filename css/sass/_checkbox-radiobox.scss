@@ -1,0 +1,299 @@
+%checkbox-custom {
+	@include position(absolute, 75% null null 40%);
+	@include size(0 2px);
+	transform-origin: left top;
+	background-color: $cSuccess;
+	content: '';
+	display: block;
+}
+
+.checkbox, .radiobox {
+	label {
+		direction: rtl;
+		color: $cUKDark;
+		@extend %anim-color;
+		padding-left: 0;
+		user-select: none;
+		cursor: pointer;
+		&:hover {
+
+			.checkbox-custom, .radiobox-custom {
+				border-color: $cUKPrimary;
+				&:checked {
+					border-color: $cUKPrimary;
+				}
+			}
+			input[type=checkbox], input[type=radio] {
+
+				&:checked {
+					& ~ .checkbox-custom, & ~ .radiobox-custom {
+						border-color: $cUKPrimary;
+					}
+				}
+			}
+		}
+	}
+
+	.form-group--inline > &, .form-group > & {
+		@extend %no-margin;
+	}
+
+	.editing & {
+		display: block;
+		@extend %no-margin;
+		@extend %table-height;
+
+		input[type=checkbox], input[type=radio] {
+			display: block;
+			@extend %table-height;
+			height: $h-base * 0.63;
+			@include margin($base-spacing/4 0);
+			cursor: pointer;
+		}
+		label {
+			display: none;
+		}
+
+	}
+
+	&-label {
+		font-weight: $fwR;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	input[type=checkbox], input[type=radio] {
+		display: none;
+	}
+
+	.checkbox-custom, .radiobox-custom {
+		display: inline-block;
+		@extend %add__border;
+		position: relative;
+		top: 1px;
+		@include will-change(transform, border-color);
+		@extend %anim-base;
+		cursor: pointer;
+		background-color: $cUKLight;
+	}
+
+	.checkbox-custom {
+		@include size($fs-content);
+		&:after {
+			@extend %checkbox-custom;
+			transform: rotate(-55deg);
+			@extend %anim-width;
+			transition-duration: $transDur/2;
+			transition-delay: $transDur/2;
+		}
+
+		&:before{
+			@extend %checkbox-custom;
+			transform: rotate(-125deg);
+			@extend %anim-width;
+			transition-duration: $transDur/2;
+		}
+	}
+
+	.radiobox-custom {
+		border-radius: 50%;
+		$radio-box-size: $fs-base * 0.6;
+		@include size($fs-subtitle);
+		&:before {
+			content: '';
+			display: block;
+			@extend %centerAbsolutely;
+			@include size($radio-box-size);
+			@include margin((-$radio-box-size/2) null null (-$radio-box-size/2));
+			border-radius: 50%;
+			transform: scale(0);
+			background-color: $cSuccess;
+			@extend %anim-transform;
+			transition-timing-function: $ease-in-out-back;
+		}
+	}
+
+	input[type=checkbox] {
+		/* todo check checkbox sizes */
+		&:checked {
+			& ~ .checkbox-custom {
+				border-color: $cBorder;
+				&:after {
+					@include size(140% 2px);
+				}
+				&:before {
+					@include size(6px 2px);
+				}
+			}
+
+		}
+	}
+
+	input[type=radio] {
+		&:checked {
+			& ~ .radiobox-custom {
+				border-color: $cBorder;
+				&:before {
+					transform: scale(1);
+				}
+			}
+		}
+	}
+
+	&-group {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		& > * {
+			display: inline-block; // IE ISSUE FIX
+		}
+	}
+	@media (max-width: $screen-xs-max) {
+		@include margin(0);
+	}
+
+	th > &, td > & {
+		@extend %no-margin;
+		vertical-align: middle;
+		line-height: normal;
+		text-align: center;
+		@extend %no-padding;
+		label {
+			min-height: 0;
+		}
+	}
+	&.with-button {
+		display: flex;
+		align-items: center;
+		& > * {
+			display: inline-block;
+			flex: 0 0 auto;
+		}
+		p {
+			@include margin(null null null $base-spacing/4);
+		}
+		label {
+			min-height: auto;
+			line-height: 1;
+		}
+		button, .btn {
+			margin-left: auto;
+		}
+	}
+}
+
+.checkbox {
+	&-group {
+		justify-content: flex-start;
+		& > * {
+			margin-right: $base-spacing;
+		}
+	}
+}
+
+.radio {
+	&-group {
+		flex-direction: column;
+		height: 100%;
+		@extend %add__margin--top;
+
+		.form-group {
+			margin-bottom: 0;
+		}
+
+		.form-group & {
+			margin-top: 0;
+		}
+
+		.checkbox {
+			@extend %no-margin;
+			line-height: 1;
+		}
+
+		& ~ .field-validation-error {
+			margin-top: 0;
+		}
+		&--inline {
+			display: flex;
+			flex-direction: row;
+			& > * {
+				@include margin(null $base-spacing null null);
+				&:last-of-type {
+					@include margin(null 0 null null);
+				}
+			}
+		}
+		&-tabs {
+			@extend .radio-group;
+			@extend %no-margin;
+			@extend %add__padding--bottom;
+			& > div {
+				@include border-color($cBorder);
+				@include border-style(solid);
+				@include border-width(1px 1px 0px 1px);
+				&:last-of-type {
+					@include border-width(1px);
+				}
+
+			}
+			label {
+				direction: ltr;
+				@supports not (display: flex){
+					display: block;
+				}
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 0;
+			}
+			.radiobox {
+				position: relative;
+				@extend %add__padding;
+
+				&-label {
+					display: inline-block;
+					flex: 1 1 auto;
+					span {
+						position: relative;
+						display: block;
+						font-size: $fs-content;
+						line-height: normal;
+						font-style: italic;
+					}
+					&:before {
+						content: '';
+						@include position(absolute, 0);
+						@include size(0px 100%);
+						background-color: $cLightGreyTable;
+						@include will-change(width, background-color);
+						@extend %anim-base;
+					}
+				}
+
+				&:hover {
+					.radiobox-label {
+						&:before {
+							@extend %full-size;
+						}
+					}
+				}
+
+				&-custom {
+					display: inline-block;
+				}
+
+				input[type=radio] {
+					&:checked {
+						& ~ .radiobox-label {
+							&:before {
+								@extend %full-size;
+								background-color: $cLightGreen;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
