@@ -1,0 +1,27 @@
+#plane {
+	color: #333;
+	font-size: 80px;
+	position: relative;
+	top: 50px;
+	left: 150px;
+	margin-top: -38px;
+	margin-left: -45px;
+}
+
+.point {
+	display: none;
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 10px;
+	margin-left: -5px;
+	margin-top: -5px;
+	position: absolute;
+}
+
+.point1 { left: 150px; top: 50px; }
+.point2 { left: 300px; top: 200px; }
+.point3 { left: 450px; top: 50px; }
+.point4 { left: 600px; top: 200px; }
+.point5 { left: 750px; top: 50px; }
+.point6 { left: 900px; top: 200px; }

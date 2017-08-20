@@ -1,0 +1,52 @@
+body, html { 
+  background-color: #e2e9ec; 
+  margin: 0; 
+  padding: 20px; 
+  -webkit-font-smoothing: antialiased;
+}
+
+.slider {
+  width:240px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #b0bec5;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  background-color: #fff;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  color: #4ab5ea;
+  font-size: 60px;
+  font-weight: 700;
+  margin-top: -100px;
+  margin-left: -100px;
+  position: absolute;
+  left: 50%;
+  top: 150px;
+}
+
+.btn {
+  color: #fff;
+  width: 240px;
+  display: block;
+  margin: 0 auto;
+  background: #546e7a;
+  border: none;
+  font-size: 35px;
+  padding: 0;
+  line-height: 2em;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  z-index: 10;
+}
+
+.btn:active, .btn:focus { outline: none;}
+
+.btn:hover {
+  background: #37474f;
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload = function() {
+			init();
+		};
+
+		function init () {
+			var head = document.getElementById('hd');
+			var msg = document.getElementById('message');
+			var err = document.getElementById('error');
+
+			var backgroundReady = 'false';
+			var messageReady = 'false';
+
+			var promise1 = function() {
+				var p1 = new Promise(function(resolve, reject) {
+					function setBack() {
+						document.body.style.backgroundColor = 'black';
+						backgroundReady = 'true';
+						resolve('Changing background');
+						console.log('Changing background');
+					}
+
+					setTimeout(setBack, 5000);
+				});
+				return p1;
+			};
+
+			var promise2 = function() {
+				var p2 = new Promise(function(resolve, reject) {
+					function checkBackground() {
+						if (backgroundReady == 'true') {
+							msg.style.display = 'block';
+							messageReady = 'true';
+							resolve('Display message');
+							console.log('Display message');
+						} else {
+							err.style.display = 'block';
+							reject('Background not set.');
+							console.log('promise 2 rejected');
+						}
+					}
+					setTimeout(checkBackground, 3000);
+				});
+				return p2;
+			};
+
+			var promise3 = function() {
+				var p3 = new Promise(function(resolve, reject) {
+					function checkAll() {
+						if (backgroundReady == 'true' && messageReady == 'true') {
+							head.style.display = 'block';
+							resolve('Everything worked!')
+
+						} else {
+							err.style.display = 'block';
+							reject('Failure');
+						}
+					}
+					setTimeout(checkAll, 1500);
+				});
+				return p3;
+			};
+
+//	promise1().then(function(result) {
+//		console.log('promise 1: ', result)
+//	});
+//	promise2().then(function(result) {
+//		console.log('promise 2: ', result)
+//	});
+//	promise3().then(function(result) {
+//		console.log('promise 3: ', result)
+//	});
+
+			/* commented out for chaining - see below */
+			promise1()
+				.then(promise2, console.log('promise 1 pending')) // promise 2 waits for promise one to execute
+				.then(promise3, console.log('promise 2 pending, promise 3 pending'));
+		}
+
+	</script>
+</head>
+<body>
+	<h1 id="hd" style="display: none; color: white;">My Awesome Site</h1>
+	<h4 id="message" style="display: none; color: white;">This is going to be awesome!</h4>
+	<h4 id="error" style="display: none; color: red;">Something failed!</h4>
+</body>
+</html>

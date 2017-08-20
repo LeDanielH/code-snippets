@@ -1,0 +1,7 @@
+@supports (background-blend-mode: multiply) { /* IF THE BROWSER UNDERSTANDS THIS IT WILL READ THE CONDE BELOW */
+
+}
+
+@supports not (background-blend-mode: multiply) { /* IF THE BROWSER WON'T UNDERSTAND, IT WILL IGNORE THE CONDE BELOW */
+
+}

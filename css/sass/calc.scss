@@ -1,0 +1,9 @@
+// CALCULATIONS
+.math {
+    color: red + blue; // purple
+}
+
+// don't multiply units
+// 10px * 10px = 100px * px => error
+// 10px * 10 = 100px => correct
+

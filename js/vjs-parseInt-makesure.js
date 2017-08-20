@@ -1,0 +1,1 @@
+parseInt('100', 10) // vratte cislo 100 v desitkove soustave to make sure

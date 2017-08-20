@@ -1,0 +1,8 @@
+SELECT COUNT("column") FROM my_db.orders;
+SELECT COUNT(amount), SUM(amount) FROM my_db.orders WHERE person_id = 1;
+SELECT COUNT(amount) AS "column renamed", SUM(amount) AS total_amount_spent FROM my_db.orders WHERE person_id = 1;
+SUM, AVG, MIN, MAX, COUNT
+select concat(first_name, ' ', last_name) as full_name from mydb.people; -> returns full_name
+
+
+select distinct(amount) from mydb.orders; "returns unique values from a long column of values where some of them are the same"

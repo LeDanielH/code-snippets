@@ -1,0 +1,15 @@
+.blockquote:only-of-type {
+
+}
+
+.article p:nth-of-type(odd) {
+	color: maroon;
+}
+
+.article p:nth-of-type(3n) { /* select every third p */
+	color: maroon;
+}
+
+.article p:nth-of-type(4n+3) { /* starts at third => every forth */
+	color: maroon;
+}

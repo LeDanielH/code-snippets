@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.0.1/Rx.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.5.3/rx.all.js"></script>
+</head>
+<body>
+	<p>Hello world</p> 
+	<button id="button">Click me!</button>
+	<script>
+
+		var AsyncLoop = {
+			Observable: Rx.Observable,
+			$button: document.getElementById('button'),
+
+			handler: function(e) {
+				alert('clicked');
+				AsyncLoop.removeAction();
+			},
+
+			vars: function() {
+				AsyncLoop.clicks = AsyncLoop.Observable.fromEvent(AsyncLoop.$button, 'click');
+				AsyncLoop.points = AsyncLoop.clicks.map(function(e) {return {x: e.clientX, y: e.clientY};});
+			},
+
+			triggerClicksObservable: function() {
+				var subscription =
+					AsyncLoop.clicks.forEach(
+						function onNext(e) {
+							alert('clicked');
+							subscription.dispose();
+						},
+						function onError(error) {
+							console.log('ERROR!');
+						},
+						function onCompleted() {
+							console.log('done');
+						}
+					);
+			},
+
+			getPointsObservable: function() {
+				console.log(AsyncLoop.points);
+				var subscription =
+					AsyncLoop.points.forEach(
+						function onNext(point) {
+							console.log(point);
+							alert('clicked: ' + JSON.stringify(point));
+							subscription.dispose();
+						},
+						function onError(error) {
+							console.log('ERROR!');
+						},
+						function onCompleted() {
+							console.log('done');
+						}
+					);
+			},
+			action: function() {
+				AsyncLoop.$button.addEventListener('click', AsyncLoop.handler);
+			},
+
+			removeAction: function() {
+				AsyncLoop.$button.removeEventListener('click', AsyncLoop.handler);
+			},
+
+			init: function() {
+//		AsyncLoop.action();
+				AsyncLoop.vars();
+//		AsyncLoop.triggerClicksObservable();
+				AsyncLoop.getPointsObservable();
+			}
+		};
+
+		AsyncLoop.init();
+	</script>
+</body>
+</html>  

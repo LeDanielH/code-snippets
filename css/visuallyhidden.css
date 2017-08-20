@@ -1,0 +1,13 @@
+/* use aria-hidden for icons inside buttons, screen readers will ignore it */
+/* if button is a div, give it a role="button" and tabindex="0" */
+
+.visuallyhidden { /* hiding text for icon buttons - still accessible by screen reader */
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}

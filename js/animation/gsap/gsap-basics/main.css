@@ -1,0 +1,80 @@
+body { margin: 10px; }
+
+.navbar-nav { padding: 10px; }
+.navbar-nav>li { margin-right: 10px; }
+
+.navbar-nav>li>a.nav-link {
+  padding: 0;
+  font-size: 40px;
+  display: block;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  text-decoration: none;
+}
+
+.circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 60px;
+  border: 4px solid #777;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#sky{
+	background-color: #adf;
+	height: 100px;
+}
+
+.fa-motorcycle {
+	line-height: 30px;
+	color: #333;
+	font-size: 50px;
+	margin-top: 68px;
+	margin-left: 20px;
+}
+
+.ground {
+	background-color: #778;
+	height: 30px;
+}
+
+.letter {
+  font-family: 'Arial Black';
+  font-size: 70px;
+  font-weight: bold;
+  color: #444;
+  display: inline-block;
+  position: relative;
+}
+
+.greensock {
+  text-align: center;
+}
+
+.red { color: #c23; }
+.green { color: #4a2; }
+.blue { color: #00f; }
+.yellow { color: #f84; }
+.purple { color: #909; }
+
+button {
+  width: 80px;
+  height: 30px;
+  border: none;
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+}
+
+.button-container {
+  text-align: center;
+}
+.icons {;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,7 @@
+.classname:empty {
+	display: none;
+}
+
+.classname:not(:empty) {
+
+}

@@ -1,0 +1,14 @@
+#square {
+  background-image: radial-gradient(red, black);
+  position: relative;
+  width: 200px;
+  height: 200px;
+  float: left;
+}
+.text {
+  float: left;
+  font-family: arial;
+  font-size: 20px;
+  color: #333;
+  margin-left: 50px;
+}

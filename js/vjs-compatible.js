@@ -1,0 +1,2 @@
+const docHeight = Math.max(body.scrollHeight, body.offsetHeight, docElem.clientHeight, docElem.scrollHeight, docElem.offsetHeight);
+const scrollPos = body.scrollTop || docElem.scrollTop; // again for various browsers
