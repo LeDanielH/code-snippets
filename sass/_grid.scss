@@ -1,0 +1,46 @@
+
+.kf {
+	.row {
+		@extend %row;
+		&--col {
+			@extend %row;
+			flex-direction: column;
+		}
+		&--spacebetween {
+			@extend %row;
+			justify-content: space-between;
+		}
+		&--wrap {
+			@extend %row;
+			flex-wrap: wrap;
+		}
+		&--withspacing {
+			@extend %row;
+			& > div {
+				@include padding(null 5px);
+			}
+			& > div:first-child {
+				@include padding(null 5px null 0);
+			}
+			& > div:last-child {
+				@include padding(null 0 null 5px);
+			}
+		}
+	}
+	.col {
+		flex: 1 1 0;
+		max-width: 100%;
+		@for $i from 1 through 10 {
+			&--#{$i} {
+				flex: 1 1 #{$i}0%;
+				max-width: #{$i}0%;
+			}
+		}
+		&--samewidth {
+			flex: 1 0 100%; // not working in IE
+		}
+		&--nogrow {
+			flex: 0 1 0;
+		}
+	}
+}
